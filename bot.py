@@ -2,8 +2,6 @@ import logging
 import subprocess
 import sys
 import os
-from flask import Flask
-import threading
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 from io import BytesIO
@@ -12,17 +10,6 @@ import random
 
 # Установка библиотек
 subprocess.check_call([sys.executable, "-m", "pip", "install", "python-telegram-bot", "Pillow", "Flask"])
-
-# Веб-сервер
-app = Flask(__name__)
-
-@app.route('/')
-def home():
-    return "Бот работает! 🎉"
-
-def run_web():
-    port = int(os.getenv("PORT", 8080))
-    app.run(host='0.0.0.0', port=port)
 
 # Логирование
 logging.basicConfig(
@@ -584,7 +571,4 @@ def main():
 
 # Запуск веб-сервера и бота
 if __name__ == "__main__":
-    web_thread = threading.Thread(target=run_web)
-    web_thread.daemon = True
-    web_thread.start()
     main()
