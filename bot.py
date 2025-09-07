@@ -557,7 +557,8 @@ async def restart_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # ----------------------------
 
 def main():
-    TOKEN = "8201451808:AAEhW6kCFp688jI1ijULM7DahwSawQ_E3rc"
+    import os
+    TOKEN = os.getenv("8201451808:AAEhW6kCFp688jI1ijULM7DahwSawQ_E3rc")
 
     application = Application.builder().token(TOKEN).build()
 
