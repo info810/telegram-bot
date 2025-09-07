@@ -596,9 +596,7 @@ async def restart_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
 def main():
        
     TOKEN = "8201451808:AAEhW6kCFp688jI1ijULM7DahwSawQ_E3rc"
-    if not TOKEN:
-    raise RuntimeError("TOKEN не установлен! Проверь переменные окружения.")
-
+   
     application = Application.builder().token(TOKEN).build()
 
     application.add_handler(CommandHandler("start", start))
