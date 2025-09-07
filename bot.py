@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw
 import random
 
 # URL твоего проекта на Render
-RENDER_URL = "https://telegram-bot.onrender.com"  # ← Замени на свой URL
+RENDER_URL = "https://telegram-bot-2y1w.onrender.com"  # ← Замени на свой URL
 
 def keep_awake():
     while True:
