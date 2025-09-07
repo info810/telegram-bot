@@ -594,9 +594,7 @@ async def restart_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # ----------------------------
 
 def main():
-    import os
-
-    TOKEN = os.getenv("8201451808:AAEhW6kCFp688jI1ijULM7DahwSawQ_E3rc")
+       
     TOKEN = "8201451808:AAEhW6kCFp688jI1ijULM7DahwSawQ_E3rc"
     if not TOKEN:
     raise RuntimeError("TOKEN не установлен! Проверь переменные окружения.")
