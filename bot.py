@@ -2,25 +2,45 @@ import logging
 import subprocess
 import sys
 import os
+from flask import Flask
+import threading
+import requests
+import time
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 from io import BytesIO
 from PIL import Image, ImageDraw
 import random
 
-# URL твоего проекта на Render
+# Установка библиотек
+subprocess.check_call([sys.executable, "-m", "pip", "install", "python-telegram-bot", "Pillow", "Flask", "requests"])
+
+# URL Render
 RENDER_URL = "https://telegram-bot-2y1w.onrender.com"  # ← Замени на свой URL
 
 def keep_awake():
     while True:
         try:
-            # Делаем запрос к нашему же веб-серверу
-            response = requests.get(RENDER_URL)
-            print(f"✅ Будильник: ping {RENDER_URL} | Статус: {response.status_code}")
+            requests.get(RENDER_URL)
+            print(f"✅ Будильник: ping {RENDER_URL}")
         except Exception as e:
-            print(f"❌ Будильник: ошибка: {e}")
-        # Ждём 14 минут (840 секунд)
-        time.sleep(840)  # 14 минут — идеально (меньше 15)
+            print(f"❌ Ошибка будильника: {e}")
+        time.sleep(840)  # каждые 14 минут
+
+# Запускаем будильник
+threading.Thread(target=keep_awake, daemon=True).start()
+
+# Веб-сервер
+app = Flask(__name__)
+@app.route('/')
+def home():
+    return "Бот работает! 🎉"
+
+def run_web():
+    port = int(os.getenv("PORT", 8080))
+    app.run(host='0.0.0.0', port=port)
+
+# ... остальной код бота ...
 
 # Запускаем будильник в фоне
 threading.Thread(target=keep_awake, daemon=True).start()
