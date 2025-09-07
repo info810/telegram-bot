@@ -8,6 +8,23 @@ from io import BytesIO
 from PIL import Image, ImageDraw
 import random
 
+# URL твоего проекта на Render
+RENDER_URL = "https://telegram-bot.onrender.com"  # ← Замени на свой URL
+
+def keep_awake():
+    while True:
+        try:
+            # Делаем запрос к нашему же веб-серверу
+            response = requests.get(RENDER_URL)
+            print(f"✅ Будильник: ping {RENDER_URL} | Статус: {response.status_code}")
+        except Exception as e:
+            print(f"❌ Будильник: ошибка: {e}")
+        # Ждём 14 минут (840 секунд)
+        time.sleep(840)  # 14 минут — идеально (меньше 15)
+
+# Запускаем будильник в фоне
+threading.Thread(target=keep_awake, daemon=True).start()
+
 # Установка библиотек
 subprocess.check_call([sys.executable, "-m", "pip", "install", "python-telegram-bot", "Pillow", "Flask"])
 
