@@ -25,7 +25,7 @@ def keep_awake():
             print(f"✅ Будильник: ping {RENDER_URL}")
         except Exception as e:
             print(f"❌ Ошибка будильника: {e}")
-        time.sleep(840)  # каждые 14 минут
+        time.sleep(600)  # каждые 10 минут
 
 # Запускаем будильник
 threading.Thread(target=keep_awake, daemon=True).start()
